@@ -2,49 +2,64 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise 🎉</title>
+<title>Happy Birthday PRIYA 🎉</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* BACKGROUND */
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: #0f172a;
+    background: #05010a;
+    overflow: hidden;
     color: white;
-    overflow-x: hidden;
 }
 
-/* HERO SECTION */
-.hero {
+/* PARTICLES BACKGROUND */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* INTRO SCREEN */
+#intro {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(120deg, #ff4d6d, #6d28d9);
+    position: relative;
+    z-index: 2;
 }
 
-.hero h1 {
-    font-size: 55px;
-    margin: 0;
+.glowText {
+    font-size: 60px;
+    font-weight: 700;
+    text-shadow: 0 0 20px #ff4d6d, 0 0 40px #ff4d6d;
+    animation: pulse 2s infinite;
 }
 
-.hero p {
-    font-size: 18px;
-    opacity: 0.8;
+@keyframes pulse {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.05);}
+    100% {transform: scale(1);}
 }
 
 button {
-    margin-top: 20px;
-    padding: 15px 35px;
+    margin-top: 25px;
+    padding: 15px 40px;
     border: none;
     border-radius: 50px;
     font-size: 18px;
     cursor: pointer;
-    background: white;
-    color: #6d28d9;
+    background: linear-gradient(45deg,#ff4d6d,#6d28d9);
+    color: white;
+    box-shadow: 0 0 20px #ff4d6d;
     transition: 0.3s;
 }
 
@@ -53,41 +68,45 @@ button:hover {
 }
 
 /* MAIN CARD */
-.section {
+#main {
     display: none;
-    padding: 60px 20px;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .card {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
     width: 70%;
-    margin: auto;
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    animation: fadeIn 1s ease;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 40px rgba(255,0,100,0.3);
+    animation: pop 1s ease;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: scale(0.9);}
-    to {opacity: 1; transform: scale(1);}
+@keyframes pop {
+    from {transform: scale(0.5); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
 }
 
-h2 {
-    font-size: 36px;
+h1 {
+    font-size: 40px;
     color: #ffcc00;
 }
 
 /* IMAGE SLIDER */
 img {
     width: 100%;
-    max-height: 450px;
+    max-height: 420px;
     object-fit: cover;
     border-radius: 15px;
     cursor: pointer;
+    margin-top: 20px;
     transition: 0.5s;
 }
 
@@ -95,55 +114,43 @@ img:hover {
     transform: scale(1.02);
 }
 
-/* FLOATING ANIMATION */
-.floating {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: #ff4d6d;
-    border-radius: 50%;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.6;
+/* CONFETTI */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: 0;
+    animation: fall 3s linear forwards;
 }
 
-@keyframes floatUp {
-    from {transform: translateY(100vh);}
-    to {transform: translateY(-200px);}
+@keyframes fall {
+    to {transform: translateY(100vh) rotate(360deg);}
 }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 30px;
-    opacity: 0.6;
-}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-    <h1>🎁 Birthday Surprise for PRIYA</h1>
-    <p>A special experience is waiting for you</p>
-    <button onclick="start()">Enter Surprise ✨</button>
+<canvas id="canvas"></canvas>
+
+<!-- INTRO -->
+<div id="intro">
+    <div class="glowText">🎁 A Universe of Surprise</div>
+    <p>Something legendary is about to happen...</p>
+    <button onclick="start()">Enter Experience ✨</button>
 </div>
 
 <!-- MAIN -->
-<div class="section" id="main">
-
+<div id="main">
     <div class="card">
 
-        <h2>🎉 Happy Birthday PRIYA 🎉</h2>
+        <h1>🎉 Happy Birthday PRIYA 🎉</h1>
+        <p>Wishing you a life full of happiness, love & success 💖</p>
 
-        <p>Wishing you success, happiness & endless joy 💖</p>
-
-        <img id="img" src="image1.jpg" onclick="changeImage()">
-
-        <p>Click image to explore memories 👉</p>
+        <img id="img" src="image1.jpg" onclick="nextImage()">
 
     </div>
-
 </div>
 
 <!-- MUSIC -->
@@ -151,24 +158,22 @@ footer {
     <source src="birthday.mp3">
 </audio>
 
-<footer>
-Made with ❤️ for PRIYA
-</footer>
-
 <script>
+
 let step = 1;
 
+/* START EXPERIENCE */
 function start() {
-    document.querySelector(".hero").style.display = "none";
-    document.getElementById("main").style.display = "block";
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("main").style.display = "flex";
 
     document.getElementById("song").play().catch(()=>{});
 
-    createFloating();
+    launchConfetti();
 }
 
-/* IMAGE SLIDER */
-function changeImage() {
+/* IMAGE SWITCH */
+function nextImage() {
     let img = document.getElementById("img");
 
     if(step === 1){
@@ -183,16 +188,62 @@ function changeImage() {
     }
 }
 
-/* FLOATING BALLS */
-function createFloating(){
-    for(let i=0;i<20;i++){
-        let f = document.createElement("div");
-        f.className = "floating";
-        f.style.left = Math.random()*100 + "vw";
-        f.style.animationDuration = (Math.random()*5+3) + "s";
-        document.body.appendChild(f);
+/* CONFETTI ENGINE */
+function launchConfetti() {
+    for(let i=0;i<80;i++){
+        let c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random()*100 + "vw";
+        c.style.background = randomColor();
+        c.style.animationDuration = (Math.random()*3 + 2) + "s";
+        document.body.appendChild(c);
     }
 }
+
+function randomColor(){
+    const colors = ["#ff4d6d","#ffcc00","#00ffcc","#6d28d9","#ffffff"];
+    return colors[Math.floor(Math.random()*colors.length)];
+}
+
+/* PARTICLE BACKGROUND */
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<80;i++){
+    particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2,
+        d: Math.random()*1
+    });
+}
+
+function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "white";
+
+    for(let i=0;i<particles.length;i++){
+        let p = particles[i];
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+        ctx.fill();
+
+        p.y += p.d;
+
+        if(p.y > canvas.height){
+            p.y = 0;
+            p.x = Math.random()*canvas.width;
+        }
+    }
+    requestAnimationFrame(draw);
+}
+draw();
+
 </script>
 
 </body>
