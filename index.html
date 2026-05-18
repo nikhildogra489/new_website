@@ -1,133 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Birthday Surprise 🎉</title>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            text-align: center;
-            color: white;
-        }
-
-        h1 {
-            font-size: 40px;
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 15px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            background: #ff4d6d;
-            color: white;
-            margin-top: 10px;
-        }
-
-        /* FULL SCREEN IMAGE */
-        .gallery img {
-            width: 100%;
-            height: 70vh;
-            object-fit: cover;
-            cursor: pointer;
-            transition: 0.8s ease;
-            border-radius: 0;
-            margin-top: 20px;
-        }
-
-        /* Poster card */
-        .poster {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .card {
-            background: white;
-            color: black;
-            width: 70%;
-            margin: auto;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        }
-
-        .birthday-text {
-            font-size: 32px;
-            color: #ff4d6d;
-            font-weight: bold;
-        }
-
-        /* Hide second images initially */
-        #img2, #img3 {
-            display: none;
-        }
-    </style>
-</head>
-
-<body>
-
-<h1>🎁 A Special Surprise Awaits</h1>
-<p>Click button, then click image to change memories 🎉</p>
-
-<button onclick="showPoster()">Click Here</button>
-
-<!-- 🎂 Poster Section -->
-<div class="poster" id="poster">
-
-    <div class="card">
-
-        <h2 class="birthday-text">🎉 Happy Birthday PRIYA 🎉</h2>
-
-        <p>Wishing you happiness, love and success 💖</p>
-
-        <!-- 🖼️ IMAGE SLIDER -->
-        <div class="gallery">
-            <img id="bgImage" src="image1.jpg" onclick="nextImage()">
-        </div>
-
-        <p>🎂 Click image to change memories 🎈</p>
-
-    </div>
-
-</div>
-
-<!-- 🎵 MUSIC -->
-<audio id="song" loop>
-    <source src="birthday.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-let step = 1;
-
-function showPoster() {
-    document.getElementById("poster").style.display = "block";
-
-    let audio = document.getElementById("song");
-    audio.play().catch(err => console.log("Audio blocked"));
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+    background-size: 400% 400%;
+    animation: bgMove 10s ease infinite;
+    text-align: center;
+    color: white;
 }
 
-function nextImage() {
-    let img = document.getElementById("bgImage");
-
-    if (step === 1) {
-        img.src = "image2.jpg";
-        step = 2;
-    }
-    else if (step === 2) {
-        img.src = "image3.jpg";
-        step = 3;
-    }
-    else {
-        img.src = "image1.jpg";
-        step = 1;
-    }
+/* animated background */
+@keyframes bgMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
 }
-</script>
 
-</body>
-</html>
+h1 {
+    font-size: 45px;
+    margin-top: 20px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: #ff4d6d;
+    color: white;
+    margin-top: 15px;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: #ff2e63;
+}
+
+.poster {
+    display: none;
+    margin-top: 30px;
+}
+
+.card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    color: white;
+    width: 70%;
+    margin: auto;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+.birthday-text {
+    font-size: 34px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px #ff4d6d;
+}
+
+.gallery img {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.gallery img:hover {
+    transform: scale(1.02);
+}
+</style>
