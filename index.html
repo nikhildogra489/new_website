@@ -13,12 +13,9 @@
             color: white;
         }
 
-        .container {
-            margin-top: 80px;
-        }
-
         h1 {
             font-size: 40px;
+            margin-top: 20px;
         }
 
         button {
@@ -29,12 +26,24 @@
             cursor: pointer;
             background: #ff4d6d;
             color: white;
+            margin-top: 10px;
+        }
+
+        /* FULL SCREEN IMAGE */
+        .gallery img {
+            width: 100%;
+            height: 70vh;
+            object-fit: cover;
+            cursor: pointer;
+            transition: 0.8s ease;
+            border-radius: 0;
             margin-top: 20px;
         }
 
+        /* Poster card */
         .poster {
             display: none;
-            margin-top: 40px;
+            margin-top: 20px;
         }
 
         .card {
@@ -53,57 +62,70 @@
             font-weight: bold;
         }
 
-        img {
-            width: 200px;
-            margin: 10px;
-            border-radius: 10px;
+        /* Hide second images initially */
+        #img2, #img3 {
+            display: none;
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<h1>🎁 A Special Surprise Awaits</h1>
+<p>Click button, then click image to change memories 🎉</p>
 
-    <h1>🎁 A Special Surprise Awaits</h1>
-    <p>Click below to reveal it 🎉</p>
+<button onclick="showPoster()">Click Here</button>
 
-    <button onclick="showPoster()">Click Here</button>
+<!-- 🎂 Poster Section -->
+<div class="poster" id="poster">
 
-    <!-- 🎂 Poster -->
-    <div class="poster" id="poster">
+    <div class="card">
 
-        <div class="card">
+        <h2 class="birthday-text">🎉 Happy Birthday PRIYA 🎉</h2>
 
-            <h2 class="birthday-text">🎉 Happy Birthday PRIYA 🎉</h2>
+        <p>Wishing you happiness, love and success 💖</p>
 
-            <p>Wishing you happiness, love and success 💖</p>
-
-            <!-- 🖼️ Images -->
-            <div>
-                <img src="./image1.jpg">
-                <img src="./image2.jpg">
-            </div>
-
-            <p>🎂🎈🎊 Enjoy your special day 🎊🎈🎂</p>
-
+        <!-- 🖼️ IMAGE SLIDER -->
+        <div class="gallery">
+            <img id="bgImage" src="image1.jpg" onclick="nextImage()">
         </div>
+
+        <p>🎂 Click image to change memories 🎈</p>
 
     </div>
 
 </div>
 
-<!-- 🎵 Music -->
+<!-- 🎵 MUSIC -->
 <audio id="song" loop>
     <source src="birthday.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+let step = 1;
+
 function showPoster() {
     document.getElementById("poster").style.display = "block";
 
     let audio = document.getElementById("song");
     audio.play().catch(err => console.log("Audio blocked"));
+}
+
+function nextImage() {
+    let img = document.getElementById("bgImage");
+
+    if (step === 1) {
+        img.src = "image2.jpg";
+        step = 2;
+    }
+    else if (step === 2) {
+        img.src = "image3.jpg";
+        step = 3;
+    }
+    else {
+        img.src = "image1.jpg";
+        step = 1;
+    }
 }
 </script>
 
