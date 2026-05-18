@@ -3,131 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UNKNOWN FILE: PRIYA 🎬</title>
+<title>Netflix Birthday Trailer 🎬</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap');
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Montserrat;
-}
+* {margin:0;padding:0;box-sizing:border-box;font-family:Montserrat;}
 
-body{
+body {
   background:black;
-  overflow:hidden;
   color:white;
+  overflow-x:hidden;
 }
 
-/* DARK CINEMATIC BACKGROUND */
-.bg{
+/* BACKGROUND */
+.bg {
   position:fixed;
   width:100%;
   height:100%;
   background:url("background.jpg") center/cover no-repeat;
-  filter:brightness(0.12) contrast(1.4) grayscale(0.6);
-  transform:scale(1.1);
+  filter:brightness(0.25);
   z-index:-5;
 }
 
-/* FOG */
-.fog{
+/* ===== CINEMATIC INTRO ===== */
+.intro {
   position:fixed;
-  width:200%;
-  height:200%;
-  background:radial-gradient(circle, rgba(255,255,255,0.05), transparent 60%);
-  animation: drift 12s infinite linear;
-  z-index:-1;
-}
-
-@keyframes drift{
-  0%{transform:translate(0,0);}
-  50%{transform:translate(-10%,10%);}
-  100%{transform:translate(0,0);}
-}
-
-/* GLITCH TITLE */
-.title{
-  font-size:60px;
-  color:red;
-  text-shadow:0 0 20px red;
-  animation: glitch 1s infinite;
-}
-
-@keyframes glitch{
-  0%{transform:translate(0);}
-  20%{transform:translate(-2px,2px);}
-  40%{transform:translate(2px,-2px);}
-  60%{transform:translate(-1px,1px);}
-  100%{transform:translate(0);}
-}
-
-/* SCENES */
-.scene{
-  position:absolute;
   width:100%;
   height:100%;
+  background:black;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
-  text-align:center;
-  opacity:0;
-  transition:2s;
-  padding:20px;
+  z-index:999;
+  animation: fadeOut 4s ease forwards;
+  animation-delay:3s;
 }
 
-.scene.active{
-  opacity:1;
+.intro h1 {
+  font-size:90px;
+  color:red;
+  letter-spacing:15px;
+  animation: zoom 2s ease;
 }
 
-/* TEXT STYLE */
-.scene p{
-  font-size:22px;
-  max-width:700px;
-  opacity:0.8;
-  text-shadow:0 0 10px black;
+.intro p {
+  margin-top:10px;
+  opacity:0.7;
 }
 
-/* FLASH EFFECT */
-.flash{
+@keyframes zoom {
+  0% {transform:scale(0);}
+  100% {transform:scale(1);}
+}
+
+@keyframes fadeOut {
+  to {opacity:0;visibility:hidden;}
+}
+
+/* ===== PASSWORD SCREEN ===== */
+.lock {
   position:fixed;
   width:100%;
   height:100%;
-  background:white;
-  opacity:0;
-  pointer-events:none;
-  z-index:999;
+  background:black;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:900;
 }
 
-/* IMAGE SCARY STYLE */
-img{
-  width:220px;
-  height:320px;
-  object-fit:cover;
-  margin-top:15px;
-  border:2px solid rgba(255,0,0,0.4);
-  filter:brightness(0.6) contrast(1.2);
-  transition:0.4s;
+.lock input {
+  padding:12px;
+  margin-top:10px;
+  font-size:18px;
+  border-radius:5px;
 }
 
-img:hover{
-  transform:scale(1.1);
-  filter:brightness(1);
-}
-
-/* SOUND */
-.sound-btn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
+.lock button {
+  margin-top:10px;
+  padding:10px 20px;
   background:red;
-  padding:10px;
-  border:none;
   color:white;
+  border:none;
   cursor:pointer;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main {
+  display:none;
+  padding:40px;
+}
+
+/* HERO */
+.hero h1 {
+  font-size:55px;
+  color:#ff3b3b;
+}
+
+.hero p {
+  margin-top:10px;
+  opacity:0.8;
+}
+
+/* ===== TIMELINE (NETFLIX STYLE ROWS) ===== */
+.row {
+  margin-top:30px;
+}
+
+.row h2 {
+  margin-bottom:10px;
+}
+
+.scroll {
+  display:flex;
+  gap:15px;
+  overflow-x:auto;
+  padding-bottom:10px;
+}
+
+.card {
+  min-width:220px;
+  height:320px;
+  border-radius:10px;
+  overflow:hidden;
+  transition:transform 0.3s;
+}
+
+.card img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.card:hover {
+  transform:scale(1.08);
+}
+
+/* ===== CINEMATIC LETTER ===== */
+.letter {
+  margin-top:40px;
+  padding:20px;
+  background:rgba(255,255,255,0.05);
+  border-left:4px solid red;
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+/* HEART RAIN */
+.heart {
+  position:fixed;
+  top:-10px;
+  color:red;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {transform:translateY(100vh);opacity:0;}
+}
+
+/* FIREWORK */
+.firework {
+  position:fixed;
+  width:6px;
+  height:6px;
+  background:yellow;
+  border-radius:50%;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {transform:scale(1);opacity:1;}
+  100% {transform:scale(25);opacity:0;}
 }
 </style>
 </head>
@@ -135,68 +188,103 @@ img:hover{
 <body>
 
 <div class="bg"></div>
-<div class="fog"></div>
-<div class="flash" id="flash"></div>
 
+<!-- CINEMATIC INTRO -->
+<div class="intro">
+  <h1>NETFLIX</h1>
+  <p>A Special Birthday Trailer Experience 🎬</p>
+</div>
+
+<!-- PASSWORD LOCK -->
+<div class="lock" id="lock">
+  <h2>Enter DOB to Unlock 🎂</h2>
+  <input type="text" id="pass" placeholder="DD/MM/YYYY">
+  <button onclick="checkPass()">Unlock</button>
+</div>
+
+<!-- MUSIC -->
 <audio id="music" src="birthday.mp3"></audio>
 
-<!-- SCENES -->
-<div class="scene active" id="s1">
-  <div class="title">UNKNOWN FILE FOUND</div>
-  <p>Recovered data from system: PRiYA_2004</p>
-</div>
+<!-- MAIN -->
+<div class="main" id="main">
 
-<div class="scene" id="s2">
-  <div class="title">PLAYBACK STARTING...</div>
-  <p>Something is wrong with this memory...</p>
-</div>
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Happy Birthday Priya 🎉</h1>
+    <p>A cinematic journey of your memories ❤️</p>
+  </div>
 
-<div class="scene" id="s3">
-  <p>"Happy Birthday Priya..."</p>
-  <img src="image1.jpg">
-</div>
+  <!-- MEMORIES TIMELINE -->
+  <div class="row">
+    <h2>🎞️ Best Memories</h2>
+    <div class="scroll">
+      <div class="card"><img src="image1.jpg"></div>
+      <div class="card"><img src="image2.jpg"></div>
+      <div class="card"><img src="image3.jpg"></div>
+    </div>
+  </div>
 
-<div class="scene" id="s4">
-  <p>More memories appear... but they feel distorted</p>
-  <img src="image2.jpg">
-</div>
+  <!-- CINEMATIC LETTER -->
+  <div class="letter">
+    <h2>💌 A Special Letter</h2>
+    <p>
+      Dear Priya,<br><br>
+      This is not just a birthday wish… it’s a cinematic story of how special you are.
+      Every moment, every smile, every memory is priceless.  
+      Wishing you happiness beyond imagination ❤️🎬
+    </p>
+  </div>
 
-<div class="scene" id="s5">
-  <p>Final fragment detected...</p>
-  <img src="image3.jpg">
-</div>
-
-<div class="scene" id="final">
-  <div class="title">HAPPY BIRTHDAY PRIYA</div>
-  <p>THE SYSTEM HAS ENDED THE TRANSMISSION</p>
 </div>
 
 <script>
 
-let scenes=["s1","s2","s3","s4","s5","final"];
-let i=0;
-
-function nextScene(){
-  document.getElementById(scenes[i]).classList.remove("active");
-  i++;
-
-  if(i<scenes.length){
-    document.getElementById(scenes[i]).classList.add("active");
-  }else{
-    clearInterval(loop);
+/* PASSWORD */
+function checkPass(){
+  let val = document.getElementById("pass").value;
+  if(val === "28/06/2004"){
+    document.getElementById("lock").style.display="none";
+    document.getElementById("main").style.display="block";
     document.getElementById("music").play();
+    startEffects();
+  } else {
+    alert("Wrong DOB ❌");
   }
-
-  flash();
 }
 
-function flash(){
-  let f=document.getElementById("flash");
-  f.style.opacity="0.3";
-  setTimeout(()=>f.style.opacity="0",100);
+/* HEART RAIN */
+function startEffects(){
+
+  setInterval(()=>{
+    let h = document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(10+Math.random()*20)+"px";
+    h.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+  },200);
+
 }
 
-let loop=setInterval(nextScene,4000);
+/* FIREWORKS */
+document.addEventListener("click", (e)=>{
+  for(let i=0;i<12;i++){
+    let f=document.createElement("div");
+    f.className="firework";
+    f.style.left=e.clientX+"px";
+    f.style.top=e.clientY+"px";
+    f.style.background=randomColor();
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  }
+});
+
+function randomColor(){
+  let c=["red","yellow","blue","white","pink","orange"];
+  return c[Math.floor(Math.random()*c.length)];
+}
 
 </script>
 
