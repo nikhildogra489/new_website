@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Birthday Surprise for PRIYA 🎉</title>
+    <meta charset="UTF-8">
+    <title>Birthday Surprise 🎉</title>
 
     <style>
         body {
             margin: 0;
             font-family: Arial;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             text-align: center;
+            color: white;
         }
 
         .container {
@@ -17,7 +18,7 @@
         }
 
         h1 {
-            color: #38bdf8;
+            font-size: 40px;
         }
 
         button {
@@ -26,7 +27,7 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            background: #22c55e;
+            background: #ff4d6d;
             color: white;
             margin-top: 20px;
         }
@@ -34,17 +35,27 @@
         .poster {
             display: none;
             margin-top: 50px;
+        }
+
+        .card {
+            background: white;
+            color: black;
+            width: 60%;
+            margin: auto;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
             animation: fadeIn 2s ease-in;
         }
 
         .birthday-text {
-            font-size: 40px;
-            color: #facc15;
-            margin-top: 20px;
+            font-size: 35px;
+            color: #ff4d6d;
+            font-weight: bold;
         }
 
         .emoji {
-            font-size: 50px;
+            font-size: 40px;
         }
 
         @keyframes fadeIn {
@@ -63,26 +74,29 @@
 
     <button onclick="showPoster()">Click Here</button>
 
-    <!-- 🎂 Poster Section -->
     <div class="poster" id="poster">
 
-        <div class="emoji">🎈🎂🎈</div>
+        <div class="card">
 
-        <div class="birthday-text">
-            🎉 Happy Birthday PRIYA 🎉
+            <div class="emoji">🎈🎂🎈</div>
+
+            <div class="birthday-text">
+                🎉 Happy Birthday PRIYA 🎉
+            </div>
+
+            <p>
+                Wishing you a day full of love, happiness and success 💖
+            </p>
+
+            <div class="emoji">🎂🎊🎈</div>
+
         </div>
-
-        <p style="font-size:20px;">
-            Wishing you a day full of love, happiness and success 💖
-        </p>
-
-        <div class="emoji">🎂🎈🎊</div>
 
     </div>
 
 </div>
 
-<!-- 🎵 Birthday Music -->
+<!-- 🎵 Music -->
 <audio id="song" loop>
     <source src="birthday.mp3" type="audio/mpeg">
 </audio>
@@ -90,7 +104,9 @@
 <script>
 function showPoster() {
     document.getElementById("poster").style.display = "block";
-    document.getElementById("song").play();
+
+    let audio = document.getElementById("song");
+    audio.play().catch(err => console.log("Audio blocked"));
 }
 </script>
 
