@@ -2,90 +2,104 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday PRIYA 🎉</title>
+<title>Birthday Experience 🎉</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* BACKGROUND */
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: 'Poppins', sans-serif;
-    background: #05010a;
+    background: black;
     overflow: hidden;
     color: white;
 }
 
-/* PARTICLES BACKGROUND */
-canvas {
+/* ===== CINEMATIC BACKGROUND ===== */
+#bgVideo {
     position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -2;
+    filter: brightness(0.4);
 }
 
-/* INTRO SCREEN */
+/* DARK OVERLAY */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent, rgba(0,0,0,0.9));
+    z-index: -1;
+}
+
+/* ===== INTRO SCREEN ===== */
 #intro {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     text-align: center;
-    position: relative;
-    z-index: 2;
 }
 
-.glowText {
+.title {
     font-size: 60px;
     font-weight: 700;
-    text-shadow: 0 0 20px #ff4d6d, 0 0 40px #ff4d6d;
-    animation: pulse 2s infinite;
+    text-shadow: 0 0 30px #ff4d6d;
+    animation: glow 2s infinite alternate;
 }
 
-@keyframes pulse {
-    0% {transform: scale(1);}
-    50% {transform: scale(1.05);}
-    100% {transform: scale(1);}
+@keyframes glow {
+    from {text-shadow: 0 0 10px #ff4d6d;}
+    to {text-shadow: 0 0 40px #ffcc00;}
 }
 
-button {
-    margin-top: 25px;
+.subtitle {
+    margin-top: 10px;
+    opacity: 0.7;
+}
+
+.btn {
+    margin-top: 30px;
     padding: 15px 40px;
     border: none;
     border-radius: 50px;
-    font-size: 18px;
-    cursor: pointer;
     background: linear-gradient(45deg,#ff4d6d,#6d28d9);
     color: white;
-    box-shadow: 0 0 20px #ff4d6d;
+    font-size: 18px;
+    cursor: pointer;
     transition: 0.3s;
+    box-shadow: 0 0 20px #ff4d6d;
 }
 
-button:hover {
+.btn:hover {
     transform: scale(1.1);
 }
 
-/* MAIN CARD */
+/* ===== MAIN CONTENT ===== */
 #main {
     display: none;
     height: 100vh;
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative;
-    z-index: 2;
 }
 
 .card {
-    width: 70%;
+    width: 75%;
     padding: 40px;
-    border-radius: 25px;
     background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
     border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 0 40px rgba(255,0,100,0.3);
     animation: pop 1s ease;
 }
 
@@ -95,18 +109,19 @@ button:hover {
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 45px;
     color: #ffcc00;
+    text-shadow: 0 0 10px #ff4d6d;
 }
 
-/* IMAGE SLIDER */
+/* IMAGE */
 img {
     width: 100%;
     max-height: 420px;
     object-fit: cover;
-    border-radius: 15px;
-    cursor: pointer;
+    border-radius: 20px;
     margin-top: 20px;
+    cursor: pointer;
     transition: 0.5s;
 }
 
@@ -114,31 +129,33 @@ img:hover {
     transform: scale(1.02);
 }
 
-/* CONFETTI */
-.confetti {
+/* FIREWORKS CANVAS */
+canvas {
     position: fixed;
-    width: 10px;
-    height: 10px;
     top: 0;
-    animation: fall 3s linear forwards;
+    left: 0;
+    z-index: 1;
 }
-
-@keyframes fall {
-    to {transform: translateY(100vh) rotate(360deg);}
-}
-
 </style>
 </head>
 
 <body>
 
-<canvas id="canvas"></canvas>
+<!-- CINEMATIC VIDEO BACKGROUND -->
+<video autoplay muted loop id="bgVideo">
+    <source src="background.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- FIREWORKS -->
+<canvas id="fire"></canvas>
 
 <!-- INTRO -->
 <div id="intro">
-    <div class="glowText">🎁 A Universe of Surprise</div>
-    <p>Something legendary is about to happen...</p>
-    <button onclick="start()">Enter Experience ✨</button>
+    <div class="title">🎁 BIRTHDAY EXPERIENCE</div>
+    <div class="subtitle">Enter a world of surprise for PRIYA</div>
+    <button class="btn" onclick="start()">ENTER ✨</button>
 </div>
 
 <!-- MAIN -->
@@ -146,9 +163,11 @@ img:hover {
     <div class="card">
 
         <h1>🎉 Happy Birthday PRIYA 🎉</h1>
-        <p>Wishing you a life full of happiness, love & success 💖</p>
+        <p>Wishing you love, success & endless happiness 💖</p>
 
         <img id="img" src="image1.jpg" onclick="nextImage()">
+
+        <p>Tap image to explore memories ✨</p>
 
     </div>
 </div>
@@ -169,7 +188,7 @@ function start() {
 
     document.getElementById("song").play().catch(()=>{});
 
-    launchConfetti();
+    startFireworks();
 }
 
 /* IMAGE SWITCH */
@@ -188,25 +207,8 @@ function nextImage() {
     }
 }
 
-/* CONFETTI ENGINE */
-function launchConfetti() {
-    for(let i=0;i<80;i++){
-        let c = document.createElement("div");
-        c.className = "confetti";
-        c.style.left = Math.random()*100 + "vw";
-        c.style.background = randomColor();
-        c.style.animationDuration = (Math.random()*3 + 2) + "s";
-        document.body.appendChild(c);
-    }
-}
-
-function randomColor(){
-    const colors = ["#ff4d6d","#ffcc00","#00ffcc","#6d28d9","#ffffff"];
-    return colors[Math.floor(Math.random()*colors.length)];
-}
-
-/* PARTICLE BACKGROUND */
-const canvas = document.getElementById("canvas");
+/* ===== FIREWORKS ENGINE ===== */
+const canvas = document.getElementById("fire");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
@@ -214,36 +216,42 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-for(let i=0;i<80;i++){
-    particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*2,
-        d: Math.random()*1
-    });
-}
-
-function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = "white";
-
-    for(let i=0;i<particles.length;i++){
-        let p = particles[i];
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
-        ctx.fill();
-
-        p.y += p.d;
-
-        if(p.y > canvas.height){
-            p.y = 0;
-            p.x = Math.random()*canvas.width;
-        }
+function createFirework(){
+    for(let i=0;i<40;i++){
+        particles.push({
+            x: window.innerWidth/2,
+            y: window.innerHeight/2,
+            vx: (Math.random()-0.5)*8,
+            vy: (Math.random()-0.5)*8,
+            life: 100
+        });
     }
-    requestAnimationFrame(draw);
 }
-draw();
 
+function animate(){
+    ctx.fillStyle = "rgba(0,0,0,0.2)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach((p,i)=>{
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life--;
+
+        ctx.fillStyle = "hsl(" + p.life*3 + ",100%,50%)";
+        ctx.fillRect(p.x,p.y,3,3);
+
+        if(p.life <= 0){
+            particles.splice(i,1);
+        }
+    });
+
+    requestAnimationFrame(animate);
+}
+
+function startFireworks(){
+    setInterval(createFirework, 800);
+    animate();
+}
 </script>
 
 </body>
