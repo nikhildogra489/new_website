@@ -1,0 +1,3 @@
+<audio id="song" loop>
+    <source src="birthday.mp3" type="audio/mpeg">
+</audio>

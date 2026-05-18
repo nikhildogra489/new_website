@@ -1,81 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DevOps Paint App</title>
+    <title>Birthday Surprise for PRIYA 🎉</title>
+
     <style>
         body {
             margin: 0;
             font-family: Arial;
-            background: #0f172a;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
             text-align: center;
         }
 
+        .container {
+            margin-top: 120px;
+        }
+
         h1 {
-            margin: 15px;
             color: #38bdf8;
         }
 
-        .toolbar {
-            padding: 10px;
-            background: #1e293b;
-        }
-
-        canvas {
-            border: 2px solid white;
-            margin-top: 10px;
-            background: white;
-            cursor: crosshair;
-        }
-
         button {
-            padding: 8px 12px;
-            margin: 5px;
+            padding: 15px 25px;
+            font-size: 18px;
             border: none;
+            border-radius: 10px;
             cursor: pointer;
-            border-radius: 6px;
+            background: #22c55e;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .poster {
+            display: none;
+            margin-top: 50px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .birthday-text {
+            font-size: 40px;
+            color: #facc15;
+            margin-top: 20px;
+        }
+
+        .emoji {
+            font-size: 50px;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
         }
     </style>
 </head>
+
 <body>
 
-<h1>🎨 DevOps Paint App</h1>
+<div class="container">
 
-<div class="toolbar">
-    <button onclick="setColor('black')">Black</button>
-    <button onclick="setColor('red')">Red</button>
-    <button onclick="setColor('blue')">Blue</button>
-    <button onclick="clearCanvas()">Clear</button>
+    <h1>🎁 A Special Surprise Awaits</h1>
+    <p>Click below to reveal it 🎉</p>
+
+    <button onclick="showPoster()">Click Here</button>
+
+    <!-- 🎂 Poster Section -->
+    <div class="poster" id="poster">
+
+        <div class="emoji">🎈🎂🎈</div>
+
+        <div class="birthday-text">
+            🎉 Happy Birthday PRIYA 🎉
+        </div>
+
+        <p style="font-size:20px;">
+            Wishing you a day full of love, happiness and success 💖
+        </p>
+
+        <div class="emoji">🎂🎈🎊</div>
+
+    </div>
+
 </div>
 
-<canvas id="board" width="900" height="500"></canvas>
+<!-- 🎵 Birthday Music -->
+<audio id="song" loop>
+    <source src="birthday.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-let canvas = document.getElementById("board");
-let ctx = canvas.getContext("2d");
-
-let drawing = false;
-let color = "black";
-
-canvas.addEventListener("mousedown", () => drawing = true);
-canvas.addEventListener("mouseup", () => drawing = false);
-canvas.addEventListener("mouseout", () => drawing = false);
-
-canvas.addEventListener("mousemove", function (e) {
-    if (!drawing) return;
-
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(e.offsetX, e.offsetY, 3, 0, Math.PI * 2);
-    ctx.fill();
-});
-
-function setColor(c) {
-    color = c;
-}
-
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function showPoster() {
+    document.getElementById("poster").style.display = "block";
+    document.getElementById("song").play();
 }
 </script>
 
